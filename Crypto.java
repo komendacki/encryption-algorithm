@@ -17,8 +17,8 @@ public class Crypto {
         String fileName3 = reader.readLine();
         reader.close();
 
-        decrypt(fileName1, fileName2);
-        encrypt(fileName2, fileName3);
+        encrypt(fileName1, fileName2);
+        decrypt(fileName2, fileName3);
         if (checkEquality(fileName1, fileName3))
         {
             System.out.println("Source file and decrypted file are equal");
@@ -27,7 +27,6 @@ public class Crypto {
         {
             System.out.println("Source file and decrypted file are different");
         }
-        //System.out.println(checkEquality("lol", "lol1"));
 
     }
 
@@ -42,11 +41,11 @@ public class Crypto {
         while(fis.available() > 0)
         {
             int count = fis.read(buffer);
-            int k = 63;
-            for (int j = 0; j < 64; j++)
+            int k = count - 1;
+            for (int j = 0; j < count; j++)
             {
                 byte a = buffer[k];
-                a += 3;
+                a += (byte) 7;
                 reverse[j] = a;
                 k--;
             }
@@ -69,12 +68,12 @@ public class Crypto {
         while (fis.available() > 0)
         {
             int count = fis.read(buffer);
-            int k = 63;
+            int k = count - 1;
 
-            for (int j = 0; j < 64; j++)
+            for (int j = 0; j < count; j++)
             {
                 byte a = buffer[k];
-                a -= 3;
+                a -= (byte) 7;
                 reverse[j] = a;
                 k--;
             }
