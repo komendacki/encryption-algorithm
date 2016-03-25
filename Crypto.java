@@ -92,4 +92,4 @@ public class Crypto {
         boolean isTwoEqual = FileUtils.contentEquals(file1, file2);
         return isTwoEqual;
     }
-}
+
